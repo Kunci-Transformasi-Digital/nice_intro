@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 @immutable
+// ignore: must_be_immutable
 class IntroScreen extends StatelessWidget {
   ///This is a builder for an intro screen
   ///
@@ -16,11 +17,11 @@ class IntroScreen extends StatelessWidget {
 
   ///image path for your slide
   ///[String]
-  final String imageAsset;
+  final String? imageAsset;
 
   ///textStyle for your slide
   ///[TextStyle]
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   ///background color for your slide header
   ///[Color]
@@ -32,20 +33,23 @@ class IntroScreen extends StatelessWidget {
 
   ///widget to use as the header part of your screen
   ///[Widget]
-  final Widget header;
+  final Widget? header;
 
-  int _pageIndex;
+  int? _pageIndex;
 
   IntroScreen({
-    @required this.title,
+    required this.title,
     this.headerPadding = const EdgeInsets.all(12),
-    @required this.description,
+    required this.description,
     this.header,
     this.headerBgColor = Colors.white,
     this.textStyle,
     this.imageAsset,
+    // ignore: unnecessary_null_comparison
   })  : assert(title != null),
+        // ignore: unnecessary_null_comparison
         assert(description != null),
+        // ignore: unnecessary_null_comparison
         assert(title != null);
 
   set index(val) => this._pageIndex = val;
@@ -67,7 +71,7 @@ class IntroScreen extends StatelessWidget {
             child: Center(
               child: imageAsset != null
                   ? Image.asset(
-                      imageAsset,
+                      imageAsset!,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: screenSize.height * .3,
@@ -75,7 +79,7 @@ class IntroScreen extends StatelessWidget {
                   : this.header ??
                       Container(
                         child: Text(
-                          "${this._pageIndex??1}",
+                          "${this._pageIndex ?? 1}",
                           style: TextStyle(
                               fontSize: 300, fontWeight: FontWeight.w900),
                         ),
